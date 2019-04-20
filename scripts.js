@@ -3,7 +3,7 @@ function computerPlay() {
 }
 
 function playRound(playerSelection, computerSelection) {
-    playerSelection = playerSelection.toLowerCase();
+ 
     switch(computerSelection = computerPlay()) {
         case 1: computerSelection = "rock";
         break;
@@ -41,5 +41,26 @@ function playRound(playerSelection, computerSelection) {
 
     if(playerSelection == "scissors" && computerSelection == "paper") {
         return player;
+    }
+}
+
+function game() {
+    playerScore = 0;
+    computerScore = 0;
+    for (let i = 0; i < 5; i++) {
+        playerSelection = prompt("Rock, paper or scissors?");
+        if (playRound(playerSelection) == "player") {
+            playerScore++;
+            console.log("Player won!");
+        } else if(playRound(playerSelection) == "computer") {
+            computerScore++;
+            console.log("Computer won!");
+        }
+    }
+    
+    if(playerScore > computerScore) {
+        console.log("Player has more points than computer!");
+    } else if (playerScore < computerScore) {
+        console.log("Computer has more points than player!");
     }
 }
