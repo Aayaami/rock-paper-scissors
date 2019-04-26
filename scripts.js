@@ -1,9 +1,39 @@
+let playerScore = 0, computerScore = 0;
+
 function computerPlay() {
     return Math.floor(Math.random() * (4 - 1) + 1);
 }
 
-function playRound(playerSelection, computerSelection) {
- 
+const div = document.querySelector('div');
+const p = document.querySelector('p');
+
+function textOutput() {
+    div.textContent = ("Player Score = " + playerScore + " Computer Score = " + computerScore);
+if(playerScore >= 5 && playerScore > computerScore) {
+    p.textContent = "Player has won!";
+} else if(computerScore >= 5 && computerScore > playerScore) {
+    p.textContent = "Computer has won!";
+}
+}
+
+
+let btn1 = document.querySelector('#rock');
+btn1.addEventListener('click', () => {playRound("rock");
+textOutput();
+});
+
+let btn2 = document.querySelector('#paper');
+btn2.addEventListener('click', () => {playRound("paper");
+textOutput();
+});
+
+let btn3 = document.querySelector('#scissors');
+btn3.addEventListener('click', () => {playRound("scissors");
+textOutput();
+});
+
+function playRound(playerSelection) {
+
     switch(computerSelection = computerPlay()) {
         case 1: computerSelection = "rock";
         break;
@@ -13,54 +43,37 @@ function playRound(playerSelection, computerSelection) {
         break;
     }
 
-    let draw = "draw", player = "player", computer = "computer";
-
     if(playerSelection == computerSelection) {
-        return "draw";
+        return;
     }
 
     if(playerSelection == "rock" && computerSelection == "paper") {
-        return computer;
+        computerScore++;
+        return;
     }
 
     if(playerSelection == "rock" && computerSelection == "scissors") {
-        return player;
+        playerScore++;
+        return;
     }
 
     if(playerSelection == "paper" && computerSelection == "rock") {
-        return player;
+        playerScore++;
+        return;
     }
 
     if(playerSelection == "paper" && computerSelection == "scissors") {
-        return computer;
+        computerScore++;
+        return;
     }
 
     if(playerSelection == "scissors" && computerSelection == "rock") {
-        return computer;
+        computerScore++;
+        return;
     }
 
     if(playerSelection == "scissors" && computerSelection == "paper") {
-        return player;
-    }
-}
-
-function game() {
-    playerScore = 0;
-    computerScore = 0;
-    for (let i = 0; i < 5; i++) {
-        playerSelection = prompt("Rock, paper or scissors?");
-        if (playRound(playerSelection) == "player") {
-            playerScore++;
-            console.log("Player won!");
-        } else if(playRound(playerSelection) == "computer") {
-            computerScore++;
-            console.log("Computer won!");
-        }
-    }
-    
-    if(playerScore > computerScore) {
-        console.log("Player has more points than computer!");
-    } else if (playerScore < computerScore) {
-        console.log("Computer has more points than player!");
+        playerScore++;
+        return;
     }
 }
